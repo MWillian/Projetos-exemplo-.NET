@@ -5,6 +5,8 @@
 # Pastas específicas do Visual Studio
 .vs/
 .env
+*.env
+!*.env.example
 # Outros arquivos temporários
 *.user
 *.userosscache
