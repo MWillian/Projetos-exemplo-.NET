@@ -1,6 +1,12 @@
 using CashFlow.Api.Filters;
 using CashFlow.Api.Middleware;
-using System.Globalization;
+using CashFlow.Application;
+using CashFlow.Infrastructure;
+using CashFlow.Infrastructure.DataAcess;
+using Microsoft.EntityFrameworkCore;
+using DotNetEnv.Extensions;
+
+DotNetEnv.Env.TraversePath().Load();
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -8,6 +14,17 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+var connectionString = Environment.GetEnvironmentVariable("DB_CONNECTION_STRING")
+    ?? Environment.GetEnvironmentVariable("DefaultConnection");
+
+var serverVersion = new MySqlServerVersion(new Version(8, 0, 45));
+
+builder.Services.AddDbContext<CashFlowDbContext>(options =>
+    options.UseMySql(connectionString, serverVersion));
+
+builder.Services.AddInfrastructure(connectionString!);
+builder.Services.AddApplication();
 
 builder.Services.AddMvc(options => options.Filters.Add(typeof(ExceptionFilter)));
 

@@ -9,7 +9,7 @@ namespace CashFlow.Domain.Repositories.Expenses
 {
     public interface IExpensesRepository
     {
-        void AddExpense(Expense expense);
+        Task AddExpense(Expense expense);
         void UpdateExpense(Expense expense);
         void DeleteExpense(Expense expense);
     }

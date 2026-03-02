@@ -1,16 +1,26 @@
 ﻿using CashFlow.Communication.Requests;
 using CashFlow.Communication.Responses;
 using CashFlow.Domain.Entities;
+using CashFlow.Domain.Repositories.Expenses;
 using CashFlow.Exception.ExceptionBase;
 
 namespace CashFlow.Application.UseCases.Expenses.Register;
 
-public class RegisterExpenseUseCase
+public class RegisterExpenseUseCase : IRegisterExpenseUseCase
 {
-    public ResponseRegisterExpenseJson Execute(RequestRegisterExpenseJson request)
+    private readonly IExpensesRepository _repository;
+    private readonly IUnitOfWork _unitOfWork;
+
+    public RegisterExpenseUseCase(IExpensesRepository repository, IUnitOfWork unitOfWork)
+    {
+        _repository = repository;
+        _unitOfWork = unitOfWork;
+    }
+    public async Task<ResponseRegisterExpenseJson> Execute(RequestRegisterExpenseJson request)
     {
         if (ValidadeRequest(request))
         {
+
             var expenseEntity = new Expense()
             {
                 Amount = request.Ammount,
@@ -19,6 +29,8 @@ public class RegisterExpenseUseCase
                 Date = request.Date,
                 Payment = (Domain.Enums.PaymentType)request.Payment
             };
+            _repository.AddExpense(expenseEntity);
+            _unitOfWork.Commit();
         }
         return new ResponseRegisterExpenseJson();
     }
