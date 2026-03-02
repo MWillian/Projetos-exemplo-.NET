@@ -4,7 +4,7 @@
 
 # Pastas específicas do Visual Studio
 .vs/
-
+.env
 # Outros arquivos temporários
 *.user
 *.userosscache
