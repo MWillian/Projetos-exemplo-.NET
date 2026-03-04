@@ -2,7 +2,7 @@
 
 namespace CashFlow.Infrastructure.DataAcess
 {
-    public class UnitOfWork : IUnitOfWork
+    internal class UnitOfWork : IUnitOfWork
     {
         private readonly CashFlowDbContext _dbContext;
         public UnitOfWork(CashFlowDbContext dbContext)

@@ -18,12 +18,7 @@ builder.Services.AddSwaggerGen();
 var connectionString = Environment.GetEnvironmentVariable("DB_CONNECTION_STRING")
     ?? Environment.GetEnvironmentVariable("DefaultConnection");
 
-var serverVersion = new MySqlServerVersion(new Version(8, 0, 45));
-
-builder.Services.AddDbContext<CashFlowDbContext>(options =>
-    options.UseMySql(connectionString, serverVersion));
-
-builder.Services.AddInfrastructure(connectionString!);
+builder.Services.AddInfrastructure(builder.Configuration, connectionString!);
 builder.Services.AddApplication();
 
 builder.Services.AddMvc(options => options.Filters.Add(typeof(ExceptionFilter)));

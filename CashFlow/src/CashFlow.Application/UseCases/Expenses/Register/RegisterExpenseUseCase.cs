@@ -1,4 +1,5 @@
-﻿using CashFlow.Communication.Requests;
+﻿using CashFlow.Application.Mappers;
+using CashFlow.Communication.Requests;
 using CashFlow.Communication.Responses;
 using CashFlow.Domain.Entities;
 using CashFlow.Domain.Repositories.Expenses;
@@ -16,34 +17,23 @@ public class RegisterExpenseUseCase : IRegisterExpenseUseCase
         _repository = repository;
         _unitOfWork = unitOfWork;
     }
-    public async Task<ResponseRegisterExpenseJson> Execute(RequestRegisterExpenseJson request)
+    public async Task<ResponseRegisterExpenseJson?> Execute(RequestExpenseJson request)
     {
-        if (ValidadeRequest(request))
-        {
-
-            var expenseEntity = new Expense()
-            {
-                Amount = request.Ammount,
-                Title = request.Title,
-                Description = request.Description,
-                Date = request.Date,
-                Payment = (Domain.Enums.PaymentType)request.Payment
-            };
-            _repository.AddExpense(expenseEntity);
-            _unitOfWork.Commit();
-        }
-        return new ResponseRegisterExpenseJson();
+        ValidadeRequest(request);
+        var expenseEntity = ExpenseMapper.ToEntity(request);
+        await _repository.AddExpense(expenseEntity);
+        await _unitOfWork.Commit();
+        return ExpenseMapper.ToResponse(expenseEntity);
     }
 
-    private bool ValidadeRequest(RequestRegisterExpenseJson request)
+    private void ValidadeRequest(RequestExpenseJson request)
     {
-        var validator = new RegisterExpenseValidator();
+        var validator = new RequestExpenseValidator();
         var result = validator.Validate(request);
         if (!result.IsValid)
         {
             var errorsList = result.Errors.Select(x => x.ErrorMessage).ToList();
             throw new ErrorOnValidationException(errorsList);
         }
-        return true;
     }
 }
