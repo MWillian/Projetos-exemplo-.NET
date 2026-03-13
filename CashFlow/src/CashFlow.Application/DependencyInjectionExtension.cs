@@ -1,9 +1,11 @@
-﻿using CashFlow.Application.UseCases.Expenses.Register;
+﻿using CashFlow.Application.UseCases.Expenses.DeleteById;
 using CashFlow.Application.UseCases.Expenses.GetAll;
-using Microsoft.Extensions.DependencyInjection;
 using CashFlow.Application.UseCases.Expenses.GetById;
-using CashFlow.Application.UseCases.Expenses.DeleteById;
+using CashFlow.Application.UseCases.Expenses.Register;
 using CashFlow.Application.UseCases.Expenses.UpdateExpense;
+using CashFlow.Application.UseCases.User;
+using CashFlow.Domain.Secutiry.Cryptography;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace CashFlow.Application
 {
@@ -20,6 +22,7 @@ namespace CashFlow.Application
             services.AddScoped<IGetExpenseByIdUseCase, GetExpenseByIdUseCase>();
             services.AddScoped<IDeleteExpenseByIdUseCase, DeleteExpenseByIdUseCase>();
             services.AddScoped<IUpdateExpenseUseCase, UpdateExpenseUseCase>();
+            services.AddScoped<IRegisterUserUseCase, RegisterUserUseCase>();
         }
     }
 }

@@ -135,4 +135,16 @@
   <data name="EXPENSE_NOT_FOUND" xml:space="preserve">
     <value>Despesa não encontrada.</value>
   </data>
+  <data name="USER_NAME_IS_REQUIRED" xml:space="preserve">
+    <value>Nome de usuário em branco.</value>
+  </data>
+  <data name="INVALID_EMAIL" xml:space="preserve">
+    <value>Email inválido.</value>
+  </data>
+  <data name="INVALID_PASSWORD" xml:space="preserve">
+    <value>Sua senha deve ter pelo menos 8 caracteres, uma letra maiúscula, uma letra minúscula, um número, e um caracter especial(!,?,*,.).</value>
+  </data>
+  <data name="EMAIL_ALREADY_REGISTRED" xml:space="preserve">
+    <value>Este email já está sendo utilizado.</value>
+  </data>
 </root>

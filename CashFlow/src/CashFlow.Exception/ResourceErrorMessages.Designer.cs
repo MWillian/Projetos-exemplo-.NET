@@ -61,6 +61,15 @@ namespace CashFlow.Exception {
         }
         
         /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a This email is already being used..
+        /// </summary>
+        public static string EMAIL_ALREADY_REGISTRED {
+            get {
+                return ResourceManager.GetString("EMAIL_ALREADY_REGISTRED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a Expense Date cannot be future..
         /// </summary>
         public static string EXPENSE_DATE_CANNOT_BE_FUTURE {
@@ -75,6 +84,24 @@ namespace CashFlow.Exception {
         public static string EXPENSE_NOT_FOUND {
             get {
                 return ResourceManager.GetString("EXPENSE_NOT_FOUND", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Email is invalid..
+        /// </summary>
+        public static string INVALID_EMAIL {
+            get {
+                return ResourceManager.GetString("INVALID_EMAIL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Your password must have at least 8 characters, one uppercase letter, one lowercase letter, one number, and one special character(!,?,*,.)..
+        /// </summary>
+        public static string INVALID_PASSWORD {
+            get {
+                return ResourceManager.GetString("INVALID_PASSWORD", resourceCulture);
             }
         }
         
@@ -102,6 +129,15 @@ namespace CashFlow.Exception {
         public static string UNKNOWN_ERROR {
             get {
                 return ResourceManager.GetString("UNKNOWN_ERROR", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a The name is required..
+        /// </summary>
+        public static string USER_NAME_IS_REQUIRED {
+            get {
+                return ResourceManager.GetString("USER_NAME_IS_REQUIRED", resourceCulture);
             }
         }
         
