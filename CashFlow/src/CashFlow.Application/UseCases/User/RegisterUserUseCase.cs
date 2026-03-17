@@ -3,6 +3,7 @@ using CashFlow.Communication.Requests;
 using CashFlow.Communication.Responses;
 using CashFlow.Domain.Repositories.Expenses;
 using CashFlow.Domain.Secutiry.Cryptography;
+using CashFlow.Domain.Secutiry.Tokens;
 using CashFlow.Domain.User;
 using CashFlow.Exception;
 using CashFlow.Exception.ExceptionBase;
@@ -14,11 +15,13 @@ namespace CashFlow.Application.UseCases.User
         private readonly IUserRepository _repository;
         private readonly IUnitOfWork _unitOfWork;
         private readonly IPasswordEncripter _encrypter;
-        public RegisterUserUseCase(IUserRepository repository, IUnitOfWork unitOfWork, IPasswordEncripter encrypter)
+        IAcessTokenGenerator _acessTokenGenerator;
+        public RegisterUserUseCase(IUserRepository repository, IUnitOfWork unitOfWork, IPasswordEncripter encrypter, IAcessTokenGenerator acessTokenGenerator)
         {
             _repository = repository;
             _unitOfWork = unitOfWork;
             _encrypter = encrypter;
+            _acessTokenGenerator = acessTokenGenerator;
         }
         public async Task<ResponseRegisterUserJson> Execute(RequestRegisterUserJson request)
         {
@@ -27,7 +30,7 @@ namespace CashFlow.Application.UseCases.User
             userEntity.Password = _encrypter.Encrypt(request.Password);
             await _repository.Add(userEntity);
             await _unitOfWork.Commit();
-            return UserMapper.ToResponse(userEntity);
+            return UserMapper.ToResponse(userEntity, _acessTokenGenerator);
         }
         private async Task ValidadeRequest(RequestRegisterUserJson request)
         {

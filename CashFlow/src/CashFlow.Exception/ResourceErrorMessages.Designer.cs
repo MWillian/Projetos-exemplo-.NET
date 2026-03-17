@@ -97,6 +97,15 @@ namespace CashFlow.Exception {
         }
         
         /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a The email or password is invalid..
+        /// </summary>
+        public static string INVALID_EMAIL_OR_PASSWORD {
+            get {
+                return ResourceManager.GetString("INVALID_EMAIL_OR_PASSWORD", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a Your password must have at least 8 characters, one uppercase letter, one lowercase letter, one number, and one special character(!,?,*,.)..
         /// </summary>
         public static string INVALID_PASSWORD {

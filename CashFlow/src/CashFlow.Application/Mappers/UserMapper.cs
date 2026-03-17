@@ -1,9 +1,12 @@
 ﻿using CashFlow.Communication.Requests;
 using CashFlow.Communication.Responses;
 using CashFlow.Domain.Entities;
+using CashFlow.Domain.Secutiry.Tokens;
+using CashFlow.Domain.User;
 
 namespace CashFlow.Application.Mappers
 {
+    
     public static class UserMapper
     {
         public static User ToEntity(RequestRegisterUserJson request)
@@ -16,11 +19,12 @@ namespace CashFlow.Application.Mappers
             };
         }
 
-        public static ResponseRegisterUserJson ToResponse(User user)
+        public static ResponseRegisterUserJson ToResponse(User user, IAcessTokenGenerator tokenGenerator)
         {
             return new ResponseRegisterUserJson()
             {
-                Name = user.Name
+                Name = user.Name,
+                Token = tokenGenerator.Generate(user)
             };
         }
     }

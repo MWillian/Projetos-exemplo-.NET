@@ -3,6 +3,7 @@ using CashFlow.Application.UseCases.Expenses.GetAll;
 using CashFlow.Application.UseCases.Expenses.GetById;
 using CashFlow.Application.UseCases.Expenses.Register;
 using CashFlow.Application.UseCases.Expenses.UpdateExpense;
+using CashFlow.Application.UseCases.Login;
 using CashFlow.Application.UseCases.User;
 using CashFlow.Domain.Secutiry.Cryptography;
 using Microsoft.Extensions.DependencyInjection;
@@ -23,6 +24,7 @@ namespace CashFlow.Application
             services.AddScoped<IDeleteExpenseByIdUseCase, DeleteExpenseByIdUseCase>();
             services.AddScoped<IUpdateExpenseUseCase, UpdateExpenseUseCase>();
             services.AddScoped<IRegisterUserUseCase, RegisterUserUseCase>();
+            services.AddScoped<IDoLoginUseCase, DoLoginUseCase>();
         }
     }
 }

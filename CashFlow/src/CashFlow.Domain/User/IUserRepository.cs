@@ -6,5 +6,6 @@ namespace CashFlow.Domain.User
     {
         Task<bool> ExistActiveUserWithEmail(string email);
         Task Add(Entities.User user);
+        Task<Entities.User?> GetUserByEmail(string email);
     };
 }
